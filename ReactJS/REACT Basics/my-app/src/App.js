@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import React, { Component } from 'react';
 import Car from './Car/Car'
@@ -72,9 +71,12 @@ class App extends Component {
       { name: 'Audi', year: 2016 },
       { name: 'Mazda', year: 2008 }
     ],
-    pageTitle: 'React component'
+    pageTitle: 'React component',
+    showCars: false
   }
 
+
+  //------CHANGE TITLE FUNCTION-----//
   handleChangeTitle = (newTitle) => {
     console.log('Click')
 
@@ -83,35 +85,76 @@ class App extends Component {
     })
   }
 
+  handleToggleCars = () => {
+    console.log('Toggle')
+
+    this.setState({
+      showCars: !this.state.showCars
+    })
+  }
+
+  //-------INPUT CHANGE----//
+  // hendleInput = (event) => {
+  //   console.log('change', event.target.value)
+
+  //   this.setState({
+  //     pageTitle: event.target.value
+  //   })
+  // }
+
   render() {
     const divStyle = {
       'textAlign': 'center',
     }
 
-    const cars = this.state.cars
+    // const cars = this.state.cars
 
     return (
       <div>
         <div style={divStyle}>
           <h1 style={{ color: 'blue' }}>{this.state.pageTitle}</h1>
 
-          <button onClick={this.handleChangeTitle.bind(this, 'Changed!')}>Change title</button>
+          {/* <input 
+          type="text" 
+          onChange={this.hendleInput}
+          /> */}
 
-          <Car
-            name={cars[0].name}
-            year={cars[0].year}
-            onChangeTitle={this.handleChangeTitle.bind(this, cars[0].name)} /*better use bind!!!!*/
-          />
-          <Car
-            name={cars[1].name}
-            year={cars[1].year}
-            onChangeTitle={() => this.handleChangeTitle(cars[1].name)}
-          />
-          <Car
-            name={cars[2].name}
-            year={cars[2].year}
-            onChangeTitle={() => this.handleChangeTitle(cars[2].name)}
-          />
+          {/*<button onClick={this.handleChangeTitle.bind(this, 'Changed!')}>Change title</button> {/*change the title to 'Changed!'*/}
+
+          <button onClick={this.handleToggleCars}>Toogle cars</button>
+
+
+          { this.state.cars.map((car, index)=>{
+            return (
+              <Car 
+              name={car.name}
+              year={car.year}
+              onChangeTitle={() => {
+                this.handleChangeTitle(car.name)
+              }}
+              key={index}
+              />
+            )
+          }) }
+
+
+{/* Dont use !!!! */}
+          {/* <Car */}
+            {/* name={cars[0].name} */}
+            {/* year={cars[0].year} */}
+            {/* onChangeTitle={this.handleChangeTitle.bind(this, cars[0].name)} /*better use bind!!!!*/ /*change the title to name of car*/ }
+          {/* /> */}
+          {/* <Car */}
+            {/* name={cars[1].name} */}
+            {/* year={cars[1].year} */}
+            {/* onChangeTitle={() => this.handleChangeTitle(cars[1].name)}  */}
+            {/* /*also we can not use bind and just write function in onchange*/}
+          {/* /> */}
+          {/* <Car */}
+            {/* name={cars[2].name} */}
+            {/* year={cars[2].year} */}
+            {/* onChangeTitle={() => this.handleChangeTitle(cars[2].name)} */}
+          {/* /> */}
         </div>
 
         <p className='App'>How are you?</p>
@@ -120,7 +163,7 @@ class App extends Component {
   }
 }
 
-// STOP AT 3 FOLDER 5 LESSON
+// STOP AT 3 FOLDER 7 LESSON
 
 
 
